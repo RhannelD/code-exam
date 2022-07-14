@@ -18,9 +18,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'full_name',
+        'email_address',
+        'nominated_password',
+        'confirmed_password',
     ];
 
     /**
@@ -29,7 +30,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+        'nominated_password',
+        'confirmed_password',
         'remember_token',
     ];
 
@@ -41,4 +43,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function username()
+    {
+        return 'email_address';
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->nominated_password;
+    }
+
+    public function role()
+    {
+        return $this->hasOne(Role::class, 'user_id', 'id');
+    }
 }
