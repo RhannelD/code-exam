@@ -2,9 +2,7 @@
     <div @click.self="$emit('close')" id="defaultModal" tabindex="-1" aria-hidden="true"
         class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex bg-gray-900 bg-opacity-50 dark:bg-opacity-80">
         <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-            <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <!-- Modal header -->
                 <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                         Campus Form
@@ -20,8 +18,24 @@
                         </svg>
                     </button>
                 </div>
-                <!-- Modal body -->
                 <div class="p-6 space-y-6">
+                    <div class="mb-6">
+                        <label for="role_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
+                            Select Role
+                        </label>
+                        <select id="role_id" v-model="form.role_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">Choose a Role</option>
+                            <template v-for="item in roles" :key="item.id">
+                                <option :value="item.id">
+                                    {{ item.role_name }}
+                                </option>
+                            </template>
+                        </select>
+                        <small v-if="typeof errors.role_id == 'object'" class="text-red-500">
+                            {{ errors.role_id[0] }}
+                        </small>
+                    </div>
                     <div class="mb-6">
                         <label for="campus"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Full Name</label>
@@ -66,7 +80,7 @@
                 <!-- Modal footer -->
                 <div class=" text-right p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
                     <button @click="savingUser()" type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Save
                     </button>
                     <button @click="$emit('close')" type="button"
@@ -88,27 +102,32 @@ const emit = defineEmits(['saved','close']);
 
 const form = reactive({
     'user_id': '',
+    'role_id': '',
     'full_name': '',
     'email_address': '',
     'nominated_password': '',
     'confirmed_password': '',
 })
 
-const { errors, showUser, saveUser } = useUser();
+const { errors, roles, getSelectRoles, showUser, saveUser } = useUser();
 
 const setUser = async () => {
     if (props.user_id == 0) {
+        form.role_id = '';
         form.full_name = '';
         form.email_address = '';
         form.nominated_password = '';
         form.confirmed_password = '';
-        return;
+    } else {
+        let data = await showUser(props.user_id)
+        form.role_id = data.role_id;
+        form.full_name = data.full_name;
+        form.email_address = data.email_address;
+        form.nominated_password = data.nominated_password;
+        form.confirmed_password = data.confirmed_password;
     }
-    let data = await showUser(props.user_id)
-    form.full_name = data.full_name;
-    form.email_address = data.email_address;
-    form.nominated_password = data.nominated_password;
-    form.confirmed_password = data.confirmed_password;
+
+    await getSelectRoles(); 
 }
 
 onMounted(setUser);

@@ -5,6 +5,7 @@ import { Ref } from 'vue';
 export default function useUser() {
     const search = ref('');
     const users: any = ref([]);
+    const roles: any = ref([]);
     const user_id: Ref<number|null> = ref(null);
     const errors: any = ref('');
 
@@ -12,9 +13,19 @@ export default function useUser() {
         let response = await axios.get('/api/users?search='+search.value);
         users.value = response.data.data;
     }
+
+    const getSelectRoles = async () => {
+        let response = await axios.get('/api/users/select/roles');
+        roles.value = response.data.data;
+    }
     
     const destroyUser = async (id: number) => {
-        await axios.delete('/api/users/'+id);
+        await axios.delete('/api/users/'+id)
+            .catch((error_data) => {
+                if ( error_data.response.status===403 ) {
+                    window.confirm('Unauthorized Action!')
+                }
+            });
     }
 
     const showUser = async (id: number) => {
@@ -23,8 +34,6 @@ export default function useUser() {
     }
 
     const saveUser = async (id: any, data:any) => {
-        console.log(data.user_id);
-        
         errors.value = '';
         try {
             id==0
@@ -42,8 +51,10 @@ export default function useUser() {
         errors,
         user_id,
         users,
+        roles,
         getUsers,
         destroyUser,
+        getSelectRoles,
         showUser,
         saveUser
     };

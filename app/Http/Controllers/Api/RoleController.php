@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Role;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\RoleRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RoleResource;
-use App\Http\Resources\UserResource;
 
 class RoleController extends Controller
 {
@@ -20,23 +18,10 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::query()
-            ->with('user')
             ->search(request()->search)
             ->get();
 
         return RoleResource::collection($roles);
-    }
-
-    public function users_select()
-    {
-        $users = User::query()
-            ->where(function ($query) {
-                $query->doesntHave('role');
-            })
-            ->orWhere('id', request()->user_id)
-            ->get();
-
-        return UserResource::collection($users);
     }
 
     /**
@@ -85,6 +70,8 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        $this->authorize('delete', $role);
+
         $role->delete();
     }
 }

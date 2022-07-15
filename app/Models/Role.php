@@ -10,7 +10,6 @@ class Role extends Model
     use HasFactory;
     
     protected $fillable = [
-        'user_id',
         'role_name',
         'role_description',
     ];
@@ -22,19 +21,14 @@ class Role extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->hasOne(User::class, 'role_id', 'id');
     }
     
     public function scopeSearch($query, $search)
     {
         $search = trim($search);
         $query->when(!empty($search), function ($query) use ($search) {
-            $query->where(function ($query) use ($search) {
-                $query->where('role_name', 'like', "%{$search}%")
-                ->orWhereHas('user', function ($query) use ($search) {
-                   $query->search($search);
-                });
-            });
+            $query->where('role_name', 'like', "%{$search}%");
         });
     }
 }

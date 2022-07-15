@@ -5,7 +5,6 @@ import { Ref } from 'vue';
 export default function useRole() {
     const search = ref('');
     const roles: any = ref([]);
-    const users: any = ref([]);
     const role_id: Ref<number|null> = ref(null);
     const errors: any = ref('');
 
@@ -13,14 +12,14 @@ export default function useRole() {
         let response = await axios.get('/api/roles?search='+search.value);
         roles.value = response.data.data;
     }
-
-    const getSelectUsers = async (user_id: any) => {
-        let response = await axios.get('/api/roles/select/users?user_id='+user_id);
-        users.value = response.data.data;
-    }
     
     const destroyRole = async (id: number) => {
-        await axios.delete('/api/roles/'+id);
+        await axios.delete('/api/roles/'+id)
+            .catch((error_data) => {
+                if ( error_data.response.status===403 ) {
+                    window.confirm('Unauthorized Action!')
+                }
+            });
     }
 
     const showRole = async (id: number) => {
@@ -46,10 +45,8 @@ export default function useRole() {
         errors,
         role_id,
         roles,
-        users,
         getRoles,
         destroyRole,
-        getSelectUsers,
         showRole,
         saveRole
     };

@@ -15,12 +15,6 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::limit(8)->get();
-
-        foreach ($users as $user) {
-            Role::factory()->create([
-                'user_id' => $user->id,
-            ]);
-        }
+        Role::factory(10)->create();
     }
 }

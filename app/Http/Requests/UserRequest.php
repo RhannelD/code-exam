@@ -24,6 +24,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
+            'role_id' => "required|exists:roles,id",
             'full_name' => "required|max:255|unique:users,full_name,{$this->user_id},id",
             'email_address' => "required|max:255|email|unique:users,email_address,{$this->user_id},id",
             'nominated_password' => "required|max:8",

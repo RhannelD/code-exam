@@ -37,11 +37,14 @@
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="py-3 px-6" style="width: 50%;">
+                    <th scope="col" class="py-3 px-6" style="width: 30%;">
                         Full Name
                     </th>
-                    <th scope="col" class="py-3 px-6" style="width: 50%;">
+                    <th scope="col" class="py-3 px-6" style="width: 30%;">
                         Email Address
+                    </th>
+                    <th scope="col" class="py-3 px-6" style="width: 40%;">
+                        Role
                     </th>
                     <th scope="col" class="py-3 px-6 text-center" style="width: 210px; min-width: 210px;">
                         Action
@@ -56,6 +59,9 @@
                     </th>
                     <td class="py-4 px-6">
                         {{ item.email_address }}
+                    </td>
+                    <td class="py-4 px-6">
+                        {{ item.role.role_name }}
                     </td>
                     <td class="py-4 px-6 whitespace-nowrap">
                         <button type="button" @click="user_id = item.id"

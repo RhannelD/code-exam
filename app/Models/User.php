@@ -18,6 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'role_id',
         'full_name',
         'email_address',
         'nominated_password',
@@ -56,7 +57,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->hasOne(Role::class, 'user_id', 'id');
+        return $this->belongsTo(Role::class, 'role_id', 'id');
     }
     
     public function scopeSearch($query, $search)
