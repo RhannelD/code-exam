@@ -24,4 +24,17 @@ class Role extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+    
+    public function scopeSearch($query, $search)
+    {
+        $search = trim($search);
+        $query->when(!empty($search), function ($query) use ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('role_name', 'like', "%{$search}%")
+                ->orWhereHas('user', function ($query) use ($search) {
+                   $query->search($search);
+                });
+            });
+        });
+    }
 }

@@ -3,6 +3,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Main from "./layouts/Main.vue"
 import Signin from "./components/auth/Signin.vue";
 import UserIndex from "./components/users/UserIndex.vue";
+import RoleIndex from "./components/roles/RoleIndex.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -19,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/roles",
         name: "role.index",
-        component: UserIndex,
+        component: RoleIndex,
         meta: { layout: Main },
     },
 ];

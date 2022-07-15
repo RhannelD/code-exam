@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
 
 /*
@@ -20,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('/users', UserController::class);
+
+Route::apiResource('/roles', RoleController::class);
+
+Route::get('/roles/select/users', [RoleController::class, 'users_select']);
