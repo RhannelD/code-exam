@@ -1012,6 +1012,12 @@ input:checked + .toggle-bg {
 .mb-1 {
   margin-bottom: 0.25rem;
 }
+.mr-2 {
+  margin-right: 0.5rem;
+}
+.mb-0 {
+  margin-bottom: 0px;
+}
 .block {
   display: block;
 }
@@ -1054,6 +1060,9 @@ input:checked + .toggle-bg {
 .h-9 {
   height: 2.25rem;
 }
+.h-8 {
+  height: 2rem;
+}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -1077,6 +1086,9 @@ input:checked + .toggle-bg {
 }
 .w-1\/2 {
   width: 50%;
+}
+.w-8 {
+  width: 2rem;
 }
 .max-w-2xl {
   max-width: 42rem;
@@ -1161,6 +1173,11 @@ input:checked + .toggle-bg {
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
 .divide-y > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-y-reverse: 0;
   border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
@@ -1190,6 +1207,9 @@ input:checked + .toggle-bg {
 }
 .rounded {
   border-radius: 0.25rem;
+}
+.rounded-full {
+  border-radius: 9999px;
 }
 .rounded-t {
   border-top-left-radius: 0.25rem;
@@ -1330,6 +1350,10 @@ input:checked + .toggle-bg {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
 .pr-4 {
   padding-right: 1rem;
 }
@@ -1367,6 +1391,10 @@ input:checked + .toggle-bg {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
 .font-semibold {
   font-weight: 600;
 }
@@ -1376,6 +1404,12 @@ input:checked + .toggle-bg {
 .font-normal {
   font-weight: 400;
 }
+.font-bold {
+  font-weight: 700;
+}
+.font-light {
+  font-weight: 300;
+}
 .uppercase {
   text-transform: uppercase;
 }
@@ -1384,6 +1418,12 @@ input:checked + .toggle-bg {
 }
 .leading-9 {
   line-height: 2.25rem;
+}
+.leading-tight {
+  line-height: 1.25;
+}
+.tracking-tight {
+  letter-spacing: -0.025em;
 }
 .text-gray-400 {
   --tw-text-opacity: 1;
@@ -1504,6 +1544,10 @@ input:checked + .toggle-bg {
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity));
 }
+.hover\:underline:hover {
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+}
 .focus\:z-10:focus {
   z-index: 10;
 }
@@ -1544,6 +1588,9 @@ input:checked + .toggle-bg {
 .dark .dark\:divide-gray-600 > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-opacity: 1;
   border-color: rgb(75 85 99 / var(--tw-divide-opacity));
+}
+.dark .dark\:border {
+  border-width: 1px;
 }
 .dark .dark\:border-gray-700 {
   --tw-border-opacity: 1;
@@ -1618,6 +1665,9 @@ input:checked + .toggle-bg {
   --tw-placeholder-opacity: 1;
   color: rgb(156 163 175 / var(--tw-placeholder-opacity));
 }
+.dark .dark\:ring-offset-gray-800 {
+  --tw-ring-offset-color: #1F2937;
+}
 .dark .dark\:hover\:bg-gray-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
@@ -1684,8 +1734,21 @@ input:checked + .toggle-bg {
     height: 2.5rem;
   }
 
+  .sm\:max-w-md {
+    max-width: 28rem;
+  }
+
   .sm\:rounded-lg {
     border-radius: 0.5rem;
+  }
+
+  .sm\:p-8 {
+    padding: 2rem;
+  }
+
+  .sm\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
 @media (min-width: 768px) {
@@ -1717,6 +1780,10 @@ input:checked + .toggle-bg {
     height: auto;
   }
 
+  .md\:h-screen {
+    height: 100vh;
+  }
+
   .md\:w-auto {
     width: auto;
   }
@@ -1731,6 +1798,12 @@ input:checked + .toggle-bg {
     margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
+  .md\:space-y-6 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+  }
+
   .md\:border-0 {
     border-width: 0px;
   }
@@ -1742,6 +1815,11 @@ input:checked + .toggle-bg {
   .md\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+
+  .md\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
 
   .md\:font-medium {
@@ -1759,5 +1837,18 @@ input:checked + .toggle-bg {
 
   .dark .md\:dark\:hover\:bg-transparent:hover {
     background-color: transparent;
+  }
+}
+@media (min-width: 1024px) {
+
+  .lg\:py-0 {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+}
+@media (min-width: 1280px) {
+
+  .xl\:p-0 {
+    padding: 0px;
   }
 }

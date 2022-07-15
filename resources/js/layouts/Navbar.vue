@@ -2,8 +2,9 @@
     <nav class="py-3 px-2 bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <div class="container flex flex-wrap justify-between items-center mx-auto">
             <a href="#" class="flex items-center">
-                <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-6 sm:h-10" alt="Flowbite Logo">
-                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+                    Code Exam
+                </span>
             </a>
             <button data-collapse-toggle="mobile-menu" type="button"
                 class="inline-flex justify-center items-center ml-3 text-gray-400 rounded-lg md:hidden hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-500"
@@ -37,27 +38,16 @@
                         </router-link>
                     </li>
                     <li>
-                        <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
-                            class="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
-                            Username
-                            <svg class="ml-1 w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"></path>
-                            </svg></button>
-                        <!-- Dropdown menu -->
-                        <div id="dropdownNavbar"
-                            class="z-10 w-44 font-normal bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 hidden"
-                            data-popper-placement="bottom"
-                            style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(413px, 60px);">
-                            <div class="py-1">
-                                <a @click="signin"
-                                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">
-                                    Sign out
-                                </a>
-                            </div>
-                        </div>
+                        <a
+                            class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 dark:hover:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                            {{ user.full_name }}
+                        </a>
+                    </li>
+                    <li>
+                        <a @click="logout"
+                            class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 dark:hover:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">
+                            Logout
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -66,11 +56,14 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { onMounted, ref } from "vue";
+import useAuth from "../composables/auths";
 
-const router = useRouter()
+const { user, signout, getUser } = useAuth();
 
-const signin = () => {
-    router.push({ name: 'signin' })
+onMounted(getUser);
+
+const logout = async () => {
+    await signout();
 }
 </script>

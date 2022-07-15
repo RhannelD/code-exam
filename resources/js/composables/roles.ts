@@ -29,8 +29,6 @@ export default function useRole() {
     }
 
     const saveRole = async (id: any, data:any) => {
-        console.log(data.role_id);
-        
         errors.value = '';
         try {
             id==0

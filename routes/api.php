@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
 
@@ -20,8 +21,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/users', UserController::class);
+Route::post('/signin', [AuthController::class, 'signin']);
 
-Route::apiResource('/roles', RoleController::class);
+Route::post('/signout', [AuthController::class, 'signout']);
 
-Route::get('/roles/select/users', [RoleController::class, 'users_select']);
+Route::middleware(['auth:sanctum'])->group(function () {
+    
+    Route::apiResource('/users', UserController::class);
+    
+    Route::apiResource('/roles', RoleController::class);
+    
+    Route::get('/roles/select/users', [RoleController::class, 'users_select']);
+    
+});
+
