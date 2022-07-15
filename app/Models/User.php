@@ -58,4 +58,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(Role::class, 'user_id', 'id');
     }
+    
+    public function scopeSearch($query, $search)
+    {
+        $search = trim($search);
+        $query->when(!empty($search), function ($query) use ($search) {
+            $query->where('full_name', 'like', "%{$search}%");
+        });
+    }
 }
