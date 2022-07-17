@@ -15,6 +15,27 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::factory(10)->create();
+        $roles = [
+            "Admin",
+            "General Manager",
+            "Assistant Manager",
+            "Accountant",
+            "Administrative assistant",
+            "IT technician",
+            "Human resource manager",
+            "Accounts Manager",
+            "Recruitment Manager",
+            "Technology Manager",
+            "Store Manager",
+            "Regional Manager",
+            "Functional Manager",
+            "Departmental Manager",
+        ];
+
+        foreach ($roles as $role) {
+            Role::factory()->create([
+                'role_name' => $role,
+            ]);
+        }
     }
 }

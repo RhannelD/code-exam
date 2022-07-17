@@ -1,11 +1,11 @@
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { ref, Ref } from 'vue';
 import axios from 'axios';
 
 export default function useAuth() {
     const router = useRouter();
-    const errors: any = ref('');
-    const user: any = ref([]);
+    const errors: Ref<any> = ref('');
+    const user: Ref<any> = ref([]);
 
     const signin = async (data: any) => {
         errors.value = '';
@@ -24,7 +24,7 @@ export default function useAuth() {
     const signout = async () => {
         await axios.post('/api/signout')
             .then((response) => {
-                router.push({ name: 'signin' })
+                router.push({ name: 'signin' });
             });
     }
 

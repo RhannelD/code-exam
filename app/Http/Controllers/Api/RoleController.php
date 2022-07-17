@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RoleRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RoleResource;
+use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
@@ -21,7 +22,9 @@ class RoleController extends Controller
             ->search(request()->search)
             ->get();
 
-        return RoleResource::collection($roles);
+        return RoleResource::collection($roles)->additional([
+            'can_create' => Gate::allows('create', Role::class),
+        ]);
     }
 
     /**
@@ -32,6 +35,8 @@ class RoleController extends Controller
      */
     public function store(RoleRequest $request)
     {
+        $this->authorize('create', Role::class);
+
         $role = Role::create($request->validated());
 
         return new RoleResource($role);
@@ -57,6 +62,8 @@ class RoleController extends Controller
      */
     public function update(RoleRequest $request, Role $role)
     {
+        $this->authorize('update', $role);
+
         $role->update($request->validated());
 
         return new RoleResource($role);

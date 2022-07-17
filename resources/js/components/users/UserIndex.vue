@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-5">
+    <div class="mb-4">
         <div class="flex items-center">
             <form class="flex items-center w-full" @submit.prevent="searching">
                 <label for="simple-search" class="sr-only">Search</label>
@@ -26,7 +26,7 @@
                         </path>
                     </svg>
                 </button>
-            <button @click="user_id = 0"
+            <button @click="user_id = 0" v-if="can_create"
                 class="p-2.5 px-4 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Create
             </button>
@@ -63,12 +63,12 @@
                     <td class="py-4 px-6">
                         {{ item.role.role_name }}
                     </td>
-                    <td class="py-4 px-6 whitespace-nowrap">
-                        <button type="button" @click="user_id = item.id"
+                    <td class="py-4 px-6 whitespace-nowrap text-center">
+                        <button type="button" @click="user_id = item.id" v-if="item.can_update"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 mx-1 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                             Edit
                         </button>
-                        <button type="button" @click="deleteCampus(item.id)"
+                        <button type="button" @click="deleteCampus(item.id)" v-if="item.can_delete"
                             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2 mx-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                             Delete
                         </button>
@@ -87,7 +87,7 @@ import UserForm from "./UserForm.vue";
 import { onMounted } from "vue";
 import swal from 'sweetalert';
 
-const { user_id, search, users, getUsers, destroyUser } = useUser();
+const { can_create, user_id, search, users, getUsers, destroyUser } = useUser();
 
 onMounted(getUsers);
 
@@ -107,7 +107,12 @@ const deleteCampus = async (id: number) => {
     });
 
     if (willDelete) {
-        await destroyUser(id);
+        let response = await destroyUser(id);
+        if ( response ) {
+            swal("Record Successfully Deleted", {
+                icon: "success",
+            });
+        }
         await getUsers();
     }
 }

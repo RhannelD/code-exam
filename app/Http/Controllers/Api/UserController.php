@@ -9,6 +9,7 @@ use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RoleResource;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -25,7 +26,9 @@ class UserController extends Controller
             ->search(request()->search)
             ->get();
 
-        return UserResource::collection($users);
+        return UserResource::collection($users)->additional([
+            'can_create' => Gate::allows('create', User::class),
+        ]);
     }
 
     public function roles_select()
@@ -43,6 +46,8 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        $this->authorize('create', User::class);
+
         $data = $request->validated();
 
         $data['nominated_password'] = $data['confirmed_password'] = Hash::make($data['nominated_password']);
@@ -73,8 +78,10 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $data = $request->validated();
-
-        $data['nominated_password'] = $data['confirmed_password'] = Hash::make($data['nominated_password']);
+        
+        if ( isset($data['nominated_password']) ) {
+            $data['nominated_password'] = $data['confirmed_password'] = Hash::make($data['nominated_password']);
+        }
 
         $user->update($data);
 

@@ -15554,7 +15554,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     expose();
     var props = __props;
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-      'role_id': '',
+      'role_id': null,
       'role_name': '',
       'role_description': ''
     });
@@ -15571,25 +15571,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(props.role_id == 0)) {
-                  _context.next = 4;
+                if (!(props.role_id != 0)) {
+                  _context.next = 7;
                   break;
                 }
 
-                form.role_name = '';
-                form.role_description = '';
-                return _context.abrupt("return");
-
-              case 4:
-                _context.next = 6;
+                _context.next = 3;
                 return showRole(props.role_id);
 
-              case 6:
+              case 3:
                 data = _context.sent;
+                form.role_id = props.role_id;
                 form.role_name = data.role_name;
                 form.role_description = data.role_description;
 
-              case 9:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -15610,11 +15606,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                form.role_id = props.role_id;
-                _context2.next = 3;
+                _context2.next = 2;
                 return saveRole(props.role_id, _objectSpread({}, form));
 
-              case 3:
+              case 2:
                 if (typeof errors.value == 'string') {
                   sweetalert__WEBPACK_IMPORTED_MODULE_2___default()("Record Updated Successfully", {
                     icon: "success"
@@ -15622,7 +15617,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   emit('saved');
                 }
 
-              case 4:
+              case 3:
               case "end":
                 return _context2.stop();
             }
@@ -15691,6 +15686,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     expose();
 
     var _useRole = (0,_composables_roles__WEBPACK_IMPORTED_MODULE_1__["default"])(),
+        can_create = _useRole.can_create,
         role_id = _useRole.role_id,
         search = _useRole.search,
         roles = _useRole.roles,
@@ -15723,7 +15719,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var deleteRole = /*#__PURE__*/function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(id) {
-        var willDelete;
+        var willDelete, response;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -15743,7 +15739,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 willDelete = _context2.sent;
 
                 if (!willDelete) {
-                  _context2.next = 8;
+                  _context2.next = 10;
                   break;
                 }
 
@@ -15751,10 +15747,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return destroyRole(id);
 
               case 6:
-                _context2.next = 8;
+                response = _context2.sent;
+
+                if (response) {
+                  sweetalert__WEBPACK_IMPORTED_MODULE_3___default()("Record Successfully Deleted", {
+                    icon: "success"
+                  });
+                }
+
+                _context2.next = 10;
                 return getRoles();
 
-              case 8:
+              case 10:
               case "end":
                 return _context2.stop();
             }
@@ -15793,6 +15797,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }();
 
     var __returned__ = {
+      can_create: can_create,
       role_id: role_id,
       search: search,
       roles: roles,
@@ -15856,7 +15861,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     expose();
     var props = __props;
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-      'user_id': '',
+      'user_id': null,
       'role_id': '',
       'full_name': '',
       'email_address': '',
@@ -15878,36 +15883,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(props.user_id == 0)) {
+                if (!(props.user_id != 0)) {
                   _context.next = 8;
                   break;
                 }
 
-                form.role_id = '';
-                form.full_name = '';
-                form.email_address = '';
-                form.nominated_password = '';
-                form.confirmed_password = '';
-                _context.next = 16;
-                break;
-
-              case 8:
-                _context.next = 10;
+                _context.next = 3;
                 return showUser(props.user_id);
 
-              case 10:
+              case 3:
                 data = _context.sent;
+                form.user_id = props.user_id;
                 form.role_id = data.role_id;
                 form.full_name = data.full_name;
                 form.email_address = data.email_address;
-                form.nominated_password = data.nominated_password;
-                form.confirmed_password = data.confirmed_password;
 
-              case 16:
-                _context.next = 18;
+              case 8:
+                _context.next = 10;
                 return getSelectRoles();
 
-              case 18:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -15928,11 +15923,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                form.user_id = props.user_id;
-                _context2.next = 3;
+                _context2.next = 2;
                 return saveUser(props.user_id, _objectSpread({}, form));
 
-              case 3:
+              case 2:
                 if (typeof errors.value == 'string') {
                   sweetalert__WEBPACK_IMPORTED_MODULE_2___default()("Record Updated Successfully", {
                     icon: "success"
@@ -15940,7 +15934,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   emit('saved');
                 }
 
-              case 4:
+              case 3:
               case "end":
                 return _context2.stop();
             }
@@ -16011,6 +16005,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     expose();
 
     var _useUser = (0,_composables_users__WEBPACK_IMPORTED_MODULE_1__["default"])(),
+        can_create = _useUser.can_create,
         user_id = _useUser.user_id,
         search = _useUser.search,
         users = _useUser.users,
@@ -16043,7 +16038,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var deleteCampus = /*#__PURE__*/function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(id) {
-        var willDelete;
+        var willDelete, response;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -16063,7 +16058,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 willDelete = _context2.sent;
 
                 if (!willDelete) {
-                  _context2.next = 8;
+                  _context2.next = 10;
                   break;
                 }
 
@@ -16071,10 +16066,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return destroyUser(id);
 
               case 6:
-                _context2.next = 8;
+                response = _context2.sent;
+
+                if (response) {
+                  sweetalert__WEBPACK_IMPORTED_MODULE_3___default()("Record Successfully Deleted", {
+                    icon: "success"
+                  });
+                }
+
+                _context2.next = 10;
                 return getUsers();
 
-              case 8:
+              case 10:
               case "end":
                 return _context2.stop();
             }
@@ -16113,6 +16116,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }();
 
     var __returned__ = {
+      can_create: can_create,
       user_id: user_id,
       search: search,
       users: users,
@@ -16507,7 +16511,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "mb-5"
+  "class": "mb-4"
 };
 var _hoisted_2 = {
   "class": "flex items-center"
@@ -16597,7 +16601,7 @@ var _hoisted_12 = {
   "class": "py-4 px-6"
 };
 var _hoisted_13 = {
-  "class": "py-4 px-6 whitespace-nowrap"
+  "class": "py-4 px-6 whitespace-nowrap text-center"
 };
 var _hoisted_14 = ["onClick"];
 var _hoisted_15 = ["onClick"];
@@ -16614,12 +16618,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Search"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.search]])]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.search]])]), _hoisted_7, $setup.can_create ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 0,
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $setup.role_id = 0;
     }),
     "class": "p-2.5 px-4 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-  }, " Create ")], 40
+  }, " Create ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 40
   /* PROPS, HYDRATE_EVENTS */
   , _hoisted_3)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.roles, function (item) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
@@ -16629,7 +16634,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.role_description), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_13, [item.can_update ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+      key: 0,
       type: "button",
       onClick: function onClick($event) {
         return $setup.role_id = item.id;
@@ -16637,7 +16643,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 mx-1 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
     }, " Edit ", 8
     /* PROPS */
-    , _hoisted_14), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    , _hoisted_14)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), item.can_delete ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+      key: 1,
       type: "button",
       onClick: function onClick($event) {
         return $setup.deleteRole(item.id);
@@ -16645,7 +16652,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2 mx-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
     }, " Delete ", 8
     /* PROPS */
-    , _hoisted_15)])]);
+    , _hoisted_15)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])])]), $setup.role_id != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["RoleForm"], {
@@ -16913,7 +16920,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "mb-5"
+  "class": "mb-4"
 };
 var _hoisted_2 = {
   "class": "flex items-center"
@@ -17012,7 +17019,7 @@ var _hoisted_13 = {
   "class": "py-4 px-6"
 };
 var _hoisted_14 = {
-  "class": "py-4 px-6 whitespace-nowrap"
+  "class": "py-4 px-6 whitespace-nowrap text-center"
 };
 var _hoisted_15 = ["onClick"];
 var _hoisted_16 = ["onClick"];
@@ -17029,12 +17036,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Search"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.search]])]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.search]])]), _hoisted_7, $setup.can_create ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 0,
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $setup.user_id = 0;
     }),
     "class": "p-2.5 px-4 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-  }, " Create ")], 40
+  }, " Create ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 40
   /* PROPS, HYDRATE_EVENTS */
   , _hoisted_3)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.users, function (item) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
@@ -17046,7 +17054,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.role.role_name), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_14, [item.can_update ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+      key: 0,
       type: "button",
       onClick: function onClick($event) {
         return $setup.user_id = item.id;
@@ -17054,7 +17063,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 mx-1 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
     }, " Edit ", 8
     /* PROPS */
-    , _hoisted_15), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    , _hoisted_15)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), item.can_delete ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+      key: 1,
       type: "button",
       onClick: function onClick($event) {
         return $setup.deleteCampus(item.id);
@@ -17062,7 +17072,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2 mx-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
     }, " Delete ", 8
     /* PROPS */
-    , _hoisted_16)])]);
+    , _hoisted_16)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])])]), $setup.user_id != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["UserForm"], {
@@ -17175,7 +17185,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     onClick: $setup.logout,
-    "class": "block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 dark:hover:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+    "class": "cursor-pointer block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 dark:hover:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
   }, " Logout ")])])])])]);
 }
 
@@ -17355,6 +17365,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 function useRole() {
+  var can_create = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
   var search = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
   var roles = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
   var role_id = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
@@ -17373,8 +17384,9 @@ function useRole() {
             case 2:
               response = _context.sent;
               roles.value = response.data.data;
+              can_create.value = response.data.can_create;
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -17389,18 +17401,21 @@ function useRole() {
 
   var destroyRole = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(id) {
+      var response;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
               return axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]('/api/roles/' + id)["catch"](function (error_data) {
-                if (error_data.response.status === 403) {
-                  window.confirm('Unauthorized Action!');
-                }
+                return error_data.response;
               });
 
             case 2:
+              response = _context2.sent;
+              return _context2.abrupt("return", response.status === 200);
+
+            case 4:
             case "end":
               return _context2.stop();
           }
@@ -17491,6 +17506,7 @@ function useRole() {
   }();
 
   return {
+    can_create: can_create,
     search: search,
     errors: errors,
     role_id: role_id,
@@ -17529,6 +17545,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 function useUser() {
+  var can_create = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
   var search = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
   var users = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
   var roles = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
@@ -17548,8 +17565,9 @@ function useUser() {
             case 2:
               response = _context.sent;
               users.value = response.data.data;
+              can_create.value = response.data.can_create;
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -17591,18 +17609,21 @@ function useUser() {
 
   var destroyUser = /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(id) {
+      var response;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.next = 2;
               return axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]('/api/users/' + id)["catch"](function (error_data) {
-                if (error_data.response.status === 403) {
-                  window.confirm('Unauthorized Action!');
-                }
+                return error_data.response;
               });
 
             case 2:
+              response = _context3.sent;
+              return _context3.abrupt("return", response.status === 200);
+
+            case 4:
             case "end":
               return _context3.stop();
           }
@@ -17693,6 +17714,7 @@ function useUser() {
   }();
 
   return {
+    can_create: can_create,
     search: search,
     errors: errors,
     user_id: user_id,

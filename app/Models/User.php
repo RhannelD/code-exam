@@ -55,6 +55,11 @@ class User extends Authenticatable
         return $this->nominated_password;
     }
 
+    public function getIsAdminAttribute()
+    {
+        return $this->role_id === 1;
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id', 'id');

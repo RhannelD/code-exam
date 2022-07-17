@@ -65,8 +65,8 @@ import swal from 'sweetalert';
 const props = defineProps(['role_id']);
 const emit = defineEmits(['saved', 'close']);
 
-const form = reactive({
-    'role_id': '',
+const form: any = reactive({
+    'role_id': null,
     'role_name': '',
     'role_description': '',
 });
@@ -74,20 +74,17 @@ const form = reactive({
 const { errors, showRole, saveRole } = useRole();
 
 const setRole = async () => {
-    if (props.role_id == 0) {
-        form.role_name = '';
-        form.role_description = '';
-        return;
-    } 
-    let data = await showRole(props.role_id)
-    form.role_name = data.role_name;
-    form.role_description = data.role_description;
+    if (props.role_id != 0) {
+        let data = await showRole(props.role_id)
+        form.role_id = props.role_id;
+        form.role_name = data.role_name;
+        form.role_description = data.role_description;
+    }
 }
 
 onMounted(setRole);
 
 const savingRole = async () => {
-    form.role_id = props.role_id;
     await saveRole(props.role_id, { ...form });
 
     if (typeof errors.value == 'string') {
