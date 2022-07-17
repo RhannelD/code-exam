@@ -79,6 +79,7 @@
 import useRole from "../../composables/roles";
 import RoleForm from "./RoleForm.vue";
 import { onMounted } from "vue";
+import swal from 'sweetalert';
 
 const { role_id, search, roles, getRoles, destroyRole } = useRole();
 
@@ -89,12 +90,20 @@ const searching = async () => {
 }
 
 const deleteRole = async (id: number) => {
-    if (!window.confirm('Delete the record?')) {
-        return;
-    }
+    let willDelete = await swal({
+        title: 'Delete the record?',
+        text: 'You will not be able to recover it',
+        icon: 'warning',
+        dangerMode: true,
+        buttons: ['Cancel', 'Yes, Delete It'],
+    }).then((agree) => {
+        return agree;
+    });
 
-    await destroyRole(id);
-    await getRoles();
+    if (willDelete) {
+        await destroyRole(id);
+        await getRoles();
+    }
 }
 
 const saved = async () => {

@@ -85,6 +85,7 @@
 import useUser from "../../composables/users";
 import UserForm from "./UserForm.vue";
 import { onMounted } from "vue";
+import swal from 'sweetalert';
 
 const { user_id, search, users, getUsers, destroyUser } = useUser();
 
@@ -95,12 +96,20 @@ const searching = async () => {
 }
 
 const deleteCampus = async (id: number) => {
-    if (!window.confirm('Delete the record?')) {
-        return;
-    }
+    let willDelete = await swal({
+        title: 'Delete the record?',
+        text: 'You will not be able to recover it',
+        icon: 'warning',
+        dangerMode: true,
+        buttons: ['Cancel', 'Yes, Delete It'],
+    }).then((agree) => {
+        return agree;
+    });
 
-    await destroyUser(id);
-    await getUsers();
+    if (willDelete) {
+        await destroyUser(id);
+        await getUsers();
+    }
 }
 
 const saved = async () => {

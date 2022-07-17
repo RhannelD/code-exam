@@ -96,6 +96,7 @@
 <script setup lang="ts">
 import useUser from "../../composables/users";
 import { onMounted, reactive } from "vue";
+import swal from 'sweetalert';
 
 const props = defineProps(['user_id']);
 const emit = defineEmits(['saved','close']);
@@ -137,7 +138,9 @@ const savingUser = async () => {
     await saveUser(props.user_id, {...form});
 
     if (typeof errors.value=='string') {
-        window.alert('Record Updated Successfully');
+        swal("Record Updated Successfully", {
+            icon: "success",
+        });
         emit('saved');
     }
 }

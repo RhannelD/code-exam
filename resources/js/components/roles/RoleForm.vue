@@ -60,6 +60,7 @@
 <script setup lang="ts">
 import useRole from "../../composables/roles";
 import { onMounted, reactive } from "vue";
+import swal from 'sweetalert';
 
 const props = defineProps(['role_id']);
 const emit = defineEmits(['saved', 'close']);
@@ -90,7 +91,9 @@ const savingRole = async () => {
     await saveRole(props.role_id, { ...form });
 
     if (typeof errors.value == 'string') {
-        window.alert('Record Updated Successfully');
+        swal("Record Updated Successfully", {
+            icon: "success",
+        });
         emit('saved');
     }
 }

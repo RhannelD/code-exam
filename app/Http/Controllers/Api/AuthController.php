@@ -13,7 +13,6 @@ class AuthController extends Controller
     public function signin(SigninRequest $request)
     {
         if ( Auth::attempt($request->validated()) ) {
-            return Auth::user();
             return response()->noContent();
         }
         

@@ -28,11 +28,4 @@ class RoleRequest extends FormRequest
             'role_description' => "required|max:255",
         ];
     }
-
-    public function attributes()
-    {
-        return [
-            'user_id' => 'user'
-        ];
-    }
 }
